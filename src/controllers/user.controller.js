@@ -14,11 +14,10 @@ export const updateUser = async (req, res) => {
   const user = await User.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
   }).select("-password");
-  return res.json(user)
+  return res.json(user);
 };
 
-
-export const deleteUser = async (req,res)=>{
-    await User.findByIdAndDelete(req.params.id)
-    return res.json({message: "User deleted successfully"});
-}
+export const deleteUser = async (req, res) => {
+  await User.findByIdAndDelete(req.params.id);
+  return res.json({ message: "User deleted successfully" });
+};

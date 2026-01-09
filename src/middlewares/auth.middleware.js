@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import { ErrorMessage } from "../utils/errorMessage.js";
 
 export const protect = (req, res, next) => {
   const token = req.cookies.token;
@@ -8,6 +9,7 @@ export const protect = (req, res, next) => {
     req.user = decoded;
     next();
   } catch (error) {
-    res.status(401).json({ message: "Invalid token" });
+    // res.status(401).json({ message: "Invalid token" });
+    throw new ErrorMessage(401, "Invalid token");
   }
 };

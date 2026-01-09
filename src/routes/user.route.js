@@ -8,15 +8,16 @@ import {
   getSingleUser,
   updateUser,
 } from "../controllers/user.controller.js";
+import { userExist } from "../middlewares/idExist.middleware.js";
 
 router.post("/register", registerUser);
 router.post("/login", loginUser);
 
 router
   .route("/:id")
-  .get(protect, getSingleUser)
-  .delete(protect, deleteUser)
-  .put(protect, updateUser);
+  .get(protect,userExist, getSingleUser)
+  .delete(protect,userExist, deleteUser)
+  .put(protect,userExist, updateUser);
 
 router.get("/", protect, getAllUsers);
 
